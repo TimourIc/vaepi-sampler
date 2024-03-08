@@ -3,7 +3,9 @@ from setuptools import setup
 
 packages=[
 "numpy",
-"pyyaml"
+"PyYAML",
+"torch",
+"matplotlib"
 ]
 
 setup(

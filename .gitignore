@@ -1,5 +1,4 @@
 #package structure
-
 .vscode
 data/*
 logs/*
@@ -15,3 +14,7 @@ venv/*
 
 #package metadata
 *.egg-info/
+
+#mlflow
+mlflow.db
+mlruns/*

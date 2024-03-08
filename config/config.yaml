@@ -1,3 +1,6 @@
 paths:
     data_path: "data/"
-    results_path: "results/"
+    saved_models_path: "results/models"
+    saved_figures_path: "results/figures"
+    tensorboard_runs_path: "results/runs"
+    
