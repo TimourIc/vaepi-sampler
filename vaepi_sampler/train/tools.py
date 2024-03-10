@@ -13,15 +13,15 @@ def sample_z_input(batch_size,latent_dim) -> torch.Tensor:
     return torch.randn((batch_size,latent_dim)) 
 
 
-def minimal_path_SHO(N_T, T_max, x_0):
+def minimal_path_SHO(N_T, T_max, x0, xf):
 
-    "for equal starting points x0=xf, returns the minimal Euclidean path for an SHO"
+    "returns the minimal Euclidean path for an SHO"
 
-    x=[x_0]
+    x=[x0]
     dt=T_max/(N_T-1)
 
     for i in range(1,N_T):
-        x.append(x_0*np.cosh(i*dt)+x_0*(1-np.cosh(T_max))/np.sinh(T_max)*np.sinh(i*dt))
+        x.append(x0*np.cosh(i*dt)+(xf-x0*np.cosh(T_max))/np.sinh(T_max)*np.sinh(i*dt))
 
     return x
 

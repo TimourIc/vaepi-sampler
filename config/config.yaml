@@ -3,4 +3,5 @@ paths:
     saved_models_path: "results/models"
     saved_figures_path: "results/figures"
     tensorboard_runs_path: "results/runs"
+    temp_path: "results/temp"
     
