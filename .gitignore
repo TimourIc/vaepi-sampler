@@ -6,6 +6,7 @@ logs/*
 !data/.gitkeep
 results/models/*
 !results/models/.gitkeep
+!results/figures/SHO_propagator_samples.png
 __pycache__
 sketchbooks/*
 

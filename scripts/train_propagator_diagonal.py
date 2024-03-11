@@ -19,6 +19,8 @@ import os
 
 import mlflow
 
+import numpy as np
+
 #CUDA
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logging.info(f"Using device {device}")
@@ -27,7 +29,7 @@ if device.type == "cuda":
 
 
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
-mlflow.set_experiment("propagators")
+mlflow.set_experiment("free_energy")
 
 
 hparams={
@@ -43,31 +45,32 @@ hparams={
         "lower_bound_logvar": -7
         }
 
-sysparams={
-        "T_MAX":2,
-        "N_T":100,
-        "X0": 0.5,
-        "XF": 0.5
-}
 
+T_MAX=2
+N_T=100
 
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Script in which one or more propagators are trained")
-    parser.add_argument("--T_MAX", default=sysparams["T_MAX"], type=float, help=f"Upper bound of the integral in the action (beta)")
-    parser.add_argument("--N_T", default=sysparams["N_T"], type=int, help=f"Number of discretization points in the path")
-    parser.add_argument("--X0", default=sysparams["X0"], type=float, help=f"Starting point of the propagator")
-    parser.add_argument("--XF", default=sysparams["XF"], type=float, help=f"Final point of the propagator")
+    parser.add_argument("--T_MAX", default=T_MAX, type=float, help=f"Upper bound of the integral in the action (beta)")
+    parser.add_argument("--N_T", default=N_T, type=float, help=f"Number of discretization points in the path")
     args = parser.parse_args()
 
-    sysparams["T_MAX"]=args.T_MAX
-    sysparams["N_T"]=args.N_T
-    sysparams["X0"]=args.X0
-    sysparams["XF"]=args.XF
+    x_sample_space=np.linspace(-2,2,40,endpoint=True)
 
-    train_propagator(
-        hparams,
-        sysparams,
-        action_class=HarmonicAction,
-        model_class=VAE_FNN
-    )
+    for x in x_sample_space:
+
+        sysparams={
+            "T_MAX":args.T_MAX,
+            "N_T":args.N_T,
+            "X0": x,
+            "XF": x
+        }
+        
+    
+        train_propagator(
+            hparams,
+            sysparams,
+            action_class=HarmonicAction,
+            model_class=VAE_FNN
+        )

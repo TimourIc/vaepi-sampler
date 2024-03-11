@@ -118,7 +118,6 @@ class VAE_FNN(VAE_Base):
             nn.BatchNorm1d(latent_dim),
             nn.Linear(latent_dim, hidden_size),
             nn.ReLU(),
-            nn.Dropout(p=dropout),
             # nn.BatchNorm1d(hidden_size),
             # nn.Linear(hidden_size, hidden_size),
             # nn.ReLU(),
@@ -153,12 +152,12 @@ class VAE_LSTM(VAE_Base):
     def __init__(
         self,
         latent_dim: int = 4,
-        lstm_hidden_size: int = 8,
-        encoder_hidden_size: int = 100,
+        hidden_size: int = 100,
         encoder_output_size: int = 100,
         dropout: float = 0.1,
         lower_bound_logvar: float = -3,
         upper_bound_logvar: float = 3,
+        lstm_hidden_size:int = 4
     ):
         """Complete and functional VAE that uses an LSTM in its encoder to encourage the sequential generation of the path.
         args:
@@ -180,23 +179,23 @@ class VAE_LSTM(VAE_Base):
             )
         )
 
-        encoder_sampler = GaussianProductSampler(
-            input_size=encoder_hidden_size * lstm_hidden_size,
+        encoder_sampler = GaussianProductEncoder(
+            input_size=hidden_size * lstm_hidden_size,
             output_size=encoder_output_size,
             lower_bound_logvar=lower_bound_logvar,
             upper_bound_logvar=upper_bound_logvar,
         )
 
         decoder_base = nn.Sequential(
-            nn.BatchNorm1d(encoder_hidden_size),
-            nn.Linear(encoder_hidden_size, encoder_hidden_size),
+            nn.BatchNorm1d(hidden_size),
+            nn.Linear(hidden_size, hidden_size),
             nn.ReLU(),
             nn.Dropout(p=dropout),
         )
 
         decoder_means = nn.Sequential(
-            nn.BatchNorm1d(encoder_hidden_size),
-            nn.Linear(encoder_hidden_size, latent_dim),
+            nn.BatchNorm1d(hidden_size),
+            nn.Linear(hidden_size, latent_dim),
         )
 
         super(VAE_LSTM, self).__init__(

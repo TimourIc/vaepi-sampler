@@ -5,7 +5,7 @@ packages=[
 "numpy",
 "PyYAML",
 "torch",
-"matplotlib"
+"matplotlib",
 ]
 
 setup(
