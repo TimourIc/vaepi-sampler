@@ -1,7 +1,7 @@
 In this repository a reverse VAE architecture is used to sample paths of Euclidean propagators and estimate the partition function of 1D physical systems.
 ## VAE-path-integral-sampler
 
-Two recent works have made significant progress towards sampling distributions of relevance to statistical physics with the help of ML and in particular variational inference and variational autoencoders. In [Y. Che et al., Phys. Rev. B 105, 214205](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.105.214205) the authors show that it is possible sample Euclidean path integral propagators using a decoder-only architecture with a low-dimensional latent varaible. In another recent work [G. Cantwell arXiv:2209.10423](https://arxiv.org/abs/2209.10423), the author shows that a reverse-VAE architecture can be used to learn distributions commonly found in physics where the distribution is known up to a normalization constant, providing an alternative to MCMC. Here, I will combine both ideas and apply the full encoder-decoder reverse VAE sampler from [arXiv:2209.10423] to the problem studied in [PRB 105, 214205]. As an illustration, a simple SHO system is analyzed. 
+Two recent works have made significant progress towards sampling distributions of relevance to statistical physics with the help of ML and in particular variational inference and variational autoencoders. In [Y. Che et al., Phys. Rev. B 105, 214205](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.105.214205) the authors show that it is possible sample Euclidean path integral propagators using a decoder-only architecture with a low-dimensional latent variable. In another recent work [G. Cantwell arXiv:2209.10423](https://arxiv.org/abs/2209.10423), the author shows that a reverse-VAE architecture can be used to learn distributions commonly found in physics where the distribution is known up to a normalization constant, providing an alternative to MCMC. Here, I will combine both ideas and apply the full encoder-decoder reverse VAE sampler from [arXiv:2209.10423] to the problem studied in [PRB 105, 214205]. As an illustration, a simple SHO system is analyzed. 
 
 For a discretized path space $x=[x_0,x_1,x_2,...,x_{N_{T-1}}]$ with fixed boundary points $x_0$ and $x_{N_{T-1}}=x_f$ the propagator can be computed by:
 
@@ -89,4 +89,5 @@ If we compute the free energy or trace based on both plots then we find an error
 
 4) In the current simple implementation $x_0$ and $x_f$ are not varied during training and hence separate training rounds are required. In next iterations this can of course be promoted to a conditional input for a single model. 
 
+ 
 
