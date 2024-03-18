@@ -6,7 +6,6 @@ from vaepi_sampler.actions.action_types import LocalAction
 
 
 class HarmonicAction(LocalAction):
-
     """The action of a simple 1D SHO"""
 
     def harmonic_potential(

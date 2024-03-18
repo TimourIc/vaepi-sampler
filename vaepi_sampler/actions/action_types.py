@@ -5,7 +5,6 @@ import torch
 
 
 class LocalAction:
-
     """General class that represents a local (additive) discretized action for a single particle,
     Should be written to accept torch tensors with batch size since we will be using this class for the loss function later
     """
@@ -22,7 +21,7 @@ class LocalAction:
     ):
         """
         args:
-            T_max (float): final value of the time integrand (beta) 
+            T_max (float): final value of the time integrand (beta)
             N_T (int): total number of space points in discretization of the path (including first and last) -
                 even if the paths that you will be sampling will have length N_T-2 because x0 and xf are fixed, please pass the actual N_T here.
             dim (int): number of space dimensions (for now writing everything with the assumption dim=1)
@@ -76,12 +75,10 @@ class LocalAction:
         Same logic as with kinetic_part.
         """
 
-        S_V = torch.sum(self.V((x[:, 1:] + x[:, :-1]) / 2), dim=-1) * self.dt
+        S_V = torch.sum(self.V(x), dim=-1) * self.dt
 
         if self.x0 is not None and self.xf is not None:
-            S_V += (
-                self.V((self.x0 + x[:, 0]) / 2) + self.V((self.xf + x[:, -1]) / 2)
-            ) * self.dt
+            S_V += (self.V(self.x0) + self.V(self.xf)) * self.dt
 
         return S_V
 

@@ -20,15 +20,14 @@ def set_logger(name: str):
     logger.info(sys.argv)
     return logger
 
-def number_of_model_params(model):
 
+def number_of_model_params(model):
     """custom function to get number of params in a torch model"""
 
-    model_params=0
+    model_params = 0
     for p in list(model.parameters()):
-        n=1
+        n = 1
         for s in list(p.size()):
-            n = n*s
+            n = n * s
         model_params += n
     return model_params
-

@@ -19,3 +19,4 @@ venv/*
 #mlflow
 mlflow.db
 mlruns/*
+mlruns
