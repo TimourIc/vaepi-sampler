@@ -5,19 +5,16 @@ Two recent works have made significant progress towards sampling distributions o
 
 For a discretized path space $x=[x_0,x_1,x_2,...,x_{N_{T-1}}]$ with fixed boundary points $x_0$ and $x_{N_{T-1}}=x_f$ the propagator can be computed by:
 
-$
-\begin{equation}
+$$
  K(x_f | x_0) = \left( \frac{m}{2 \pi \hbar dt} \right)^{(N_T-2)/2} \int dx_1 ... dx_{N_{T-2}} e^{ - \mathcal{S}[x]}.
-\end{equation}
-$
+$$
+ 
 
 By defining the integrand of the propagator (including the constant) as $F(x)$ it is possible to write the upper bound on the negative log of the propagator as:
 
-$
-\begin{equation}
+$$
 -\log(K) \leq  \mathbb{E}_{z \sim P(z) , x\sim R(x|z)  } \left[  - \log(F(x)) - \log(Q(z|x) ) + \log (P(z) R(x|z)) \right] .
-\end{equation}
-$
+$$
 
 As noted in [G. Cantwell arXiv:2209.10423](https://arxiv.org/abs/2209.10423) this expression can be interpreted as a reverse VAE, where starting from a latent sample $z$ from $P(z)$ the encoder generates a path $x_1,...,x_{N_T-2}$ which is then decoded back to $z$ by the decoder. In this repository, I will model $R(x|z)$ by an autoregressive LSTM similar to [A. Graves arXiv:1308.0850](https://arxiv.org/abs/1308.0850) where the output of one cell is considered as an input to the next cell.
 
