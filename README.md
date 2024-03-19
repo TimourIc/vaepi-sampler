@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-The main code is contained inte `vaepi_sampler` package. Some implementation to train the models and generate figures can be found in `scripts/`. To train the sampler for a Euclidean propagator (so far just an SHO) at temperature $T=\hbar \omega/k_b T_{max}$, discretization $N_T$ and end/final points X0/XF run:
+The main code is contained in the `vaepi_sampler` package. Some implementation to train the models and generate figures can be found in `scripts/`. To train the sampler for a Euclidean propagator (so far just an SHO) at temperature $T=\hbar \omega/k_b T_{max}$, discretization $N_T$ and end/final points X0/XF run:
 
 ```python
 python scripts/train_propagator.py --T_MAX <T_max(float)> --N_T <N_T(int)> --X0 <X0(float)> --XF <XF(float)>
@@ -72,7 +72,7 @@ and for $(x_0, x_f)= (-1,1)a_{ho}$:
 
 ### Values propagator
 
-Note that when defined with the appropriate offset constants, the value of loss function forms an upper bound for (negative log of) the propagator itself. Below we compare $e^{-\textit{loss}}$ for models trained to sample the diagonal with the actual propagator values for $T_{max}=2$.
+Note that when defined with the appropriate offset constants, the value of the loss function forms an upper bound for (negative log of) the propagator itself. Below we compare $e^{-\textit{loss}}$ for models trained to sample the diagonal with the actual propagator values for $T_{max}=2$.
 
 
 ![Text](results/figures/SHO_propagator_diagonal.png)
