@@ -6,7 +6,7 @@ Two recent works have made significant progress towards sampling distributions o
 For a discretized path space $x=[x_0,x_1,x_2,...,x_{N_{T-1}}]$ with fixed boundary points $x_0$ and $x_{N_{T-1}}=x_f$ the propagator can be computed by:
 
 $$
- K(x_f | x_0) = \left( \frac{m}{2 \pi \hbar dt} \right)^{(N_T-2)/2} \int dx_1 ... dx_{N_{T-2}} e^{ - \mathcal{S}[x]}.
+ K(x_f | x_0) = \left( \frac{m}{2 \pi \hbar dt} \right)^{(N_T-1)/2} \int dx_1 ... dx_{N_{T-2}} e^{ - \mathcal{S}[x]}.
 $$
  
 
